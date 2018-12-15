@@ -1,0 +1,126 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title=""
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Overview:" duration="0">
+        <p>&#34;What movie should I watch this evening?&#34;</p>
+<p>This question has been asked by every moviebuff to himself at some point of time. As for me — yes, and more than once. From Netflix to Hulu, the need to build robust</p>
+<p>movie recommendation systems is extremely important given the huge demand for</p>
+<p>personalized content of modern consumers.</p>
+<p>Movie recommendation system is gaining a lot of popularity because people are exposed to a lot of new movies which are good and they have not heard of based on   their choices.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Goals:" duration="0">
+        <p>The main goal of the Movie Recommender System is to suggest movies to the user based on the genre they are interested and one favourite movie of the particular genre that they have watched</p>
+<p>This recommendation system will help the users find some movies of their favourite genres that they may have never watched.</p>
+<p><strong>Workflow:</strong></p>
+<p>The Web Application will be taking few inputs from the user:</p>
+<ol type="1" start="1">
+<li>The UserID of the user</li>
+<li>The genre that they wish to watch</li>
+<li>The favourite movie of that particular genre that they have watched.        </li>
+<li>The type of filter that the recommender system would be using.</li>
+</ol>
+<p>The recommender system will then recommend 5 movies based on their genre, their favourite movie, the ratings that the similar movies have got.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Data:" duration="0">
+        <p>The dataset that is chosen for building the Recommendation System is the MovieLens Dataset, one of the most common datasets that is available on the internet for building a Recommender System.</p>
+<p><a href="https://grouplens.org/datasets/movielens/" target="_blank">MovieLens Dataset</a></p>
+<p><a href="http://files.grouplens.org/datasets/movielens/ml-20m-README.html" target="_blank">ReadMe File for the Dataset</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Recommendation System" duration="0">
+        
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Content-Based:" duration="0">
+        <p>The Content-Based Recommender relies on the similarity of the items being recommended. The basic idea is that if you like an item, then you will also like a &#34;similar&#34; item. It generally works well when it&#39;s easy to determine the context/properties of each item.</p>
+<p>A content based recommender works with data that the user provides, either explicitly movie ratings for the MovieLens dataset. Based on that data, a user profile is generated, which is then used to make suggestions to the user. As the user provides more inputs or takes actions on the recommendations, the engine becomes more and more accurate.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Process Outline:" duration="0">
+        <p>1.        Data will be downloaded from the MovieLens website</p>
+<p>2.        Data Preprocessing will be done to clean the data and handle missing values</p>
+<p>3.        Exploratory Data Analysis will be performed to understand the data</p>
+<p>4.        Feature Selection</p>
+<p>5.        The model will be docekerized and deployed on AWS</p>
+<p>6.        A web application will be built using Flask to display the recommendations to the user</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Tools and Technologies:" duration="0">
+        <p>1)        Language: Python</p>
+<p>2)        Data Analysis and Visualization : Python Packages (NumPy and Pandas)</p>
+<p>3)        Recommendation System Model :  Content Based Filtering</p>
+<p>4)        Container: Docker</p>
+<p>5)        Cloud Tools/Platforms: AWS (Amazon WEb Services) EC2</p>
+<p>6)        Web Development Tools : Flask</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>
