@@ -52,31 +52,138 @@
     
       <google-codelab-step label="Data:" duration="0">
         <p>The dataset that is chosen for building the Recommendation System is the MovieLens Dataset, one of the most common datasets that is available on the internet for building a Recommender System.</p>
+<p><a href="https://www.kaggle.com/rounakbanik/the-movies-dataset" target="_blank">Datatset</a></p>
 <p><a href="https://grouplens.org/datasets/movielens/" target="_blank">MovieLens Dataset</a></p>
 <p><a href="http://files.grouplens.org/datasets/movielens/ml-20m-README.html" target="_blank">ReadMe File for the Dataset</a></p>
+<p>This dataset consists of the following files:</p>
+<p>movies_metadata.csv: The main Movies Metadata file. Contains information on 45,000 movies featured in the Full MovieLens dataset. Features include posters, backdrops, budget, revenue, release dates, languages, production countries and companies.</p>
+<p>keywords.csv: Contains the movie plot keywords for our MovieLens movies. Available in the form of a stringified JSON Object.</p>
+<p>credits.csv: Consists of Cast and Crew Information for all our movies. Available in the form of a stringified JSON Object.</p>
+<p>links.csv: The file that contains the TMDB and IMDB IDs of all the movies featured in the Full MovieLens dataset.</p>
+<p>links_small.csv: Contains the TMDB and IMDB IDs of a small subset of 9,000 movies of the Full Dataset.</p>
+<p>ratings_small.csv: The subset of 100,000 ratings from 700 users on 9,000 movies.</p>
+<p>The Full MovieLens Dataset consisting of 26 million ratings and 750,000 tag applications from 270,000 users on all the 45,000 movies </p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Recommendation System" duration="0">
-        
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Content-Based:" duration="0">
-        <p>The Content-Based Recommender relies on the similarity of the items being recommended. The basic idea is that if you like an item, then you will also like a &#34;similar&#34; item. It generally works well when it&#39;s easy to determine the context/properties of each item.</p>
+      <google-codelab-step label="Recommendation System:" duration="0">
+        <ol type="1" start="1">
+<li><strong>Content-Based:</strong></li>
+</ol>
+<p>The Content-Based Recommender relies on the similarity of the items being recommended. The basic idea is that if you like an item, then you will also like a &#34;similar&#34; item. It generally works well when it&#39;s easy to determine the context/properties of each item.</p>
 <p>A content based recommender works with data that the user provides, either explicitly movie ratings for the MovieLens dataset. Based on that data, a user profile is generated, which is then used to make suggestions to the user. As the user provides more inputs or takes actions on the recommendations, the engine becomes more and more accurate.</p>
+<p><strong>Approach:</strong></p>
+<p>Two approaches are used in content based filtering</p>
+<ol type="1" start="1">
+<li><strong>TfidfVectorizer:</strong></li>
+</ol>
+<p>Convert a collection of raw documents to a matrix of TF-IDF features. Equivalent to CountVectorizer followed by TfidfTransformer.</p>
+<ol type="1" start="2">
+<li><strong>CountVectorizer:</strong></li>
+</ol>
+<p>Convert a collection of text documents to a matrix of token counts. This implementation produces a sparse representation of the counts using scipy.sparse.csr_matrix.</p>
+<p>If you do not provide an a-priori dictionary and you do not use an analyzer that does some kind of feature selection then the number of features will be equal to the vocabulary size found by analyzing the data.</p>
+<p><strong>2. Collaborative Based Recommendation:</strong></p>
+<p><strong>Method</strong>: Item Based</p>
+<p><strong>Package used</strong>: Surprise SVD</p>
+<p><strong>Approach:</strong></p>
+<p>In item-based recommendation is achieved using below steps:</p>
+<p>1) Select top 50 movies which the user has not rated</p>
+<p>2) Predict ratings for these movies using SVD model</p>
+<p>svd.predict(50, 302, 3)</p>
+<p>Prediction(uid=50, iid=302, r_ui=3, est=3.3500295091155738, details={&#39;was_impossible&#39;: False})</p>
+<p>Here we got rating of 3.35 for movie 302 as this recommender system is based on rating of the movie.</p>
+<p>3) Select top 10 movies from these list</p>
+<p>4) Fetch the movie name and recommend these to the user</p>
+<p><strong>Evaluation:</strong></p>
+<p>Evaluating RMSE, MAE of algorithm SVD.</p>
+<p>------------</p>
+<p>Fold 1</p>
+<p>RMSE: 0.8989</p>
+<p>MAE:  0.6907</p>
+<p>------------</p>
+<p>Fold 2</p>
+<p>RMSE: 0.8948</p>
+<p>MAE:  0.6904</p>
+<p>------------</p>
+<p>Fold 3</p>
+<p>RMSE: 0.8981</p>
+<p>MAE:  0.6921</p>
+<p>------------</p>
+<p>Fold 4</p>
+<p>RMSE: 0.8988</p>
+<p>MAE:  0.6929</p>
+<p>------------</p>
+<p>Fold 5</p>
+<p>RMSE: 0.8963</p>
+<p>MAE:  0.6910</p>
+<p>------------</p>
+<p>------------</p>
+<p>Mean RMSE: 0.8974</p>
+<p>Mean MAE : 0.6914</p>
+<p>------------</p>
+<p>------------</p>
+<p>Recommended Movies for User 50:</p>
+<p>Recommended movie and its rating for user 50: </p>
+<p>   movieid    rating</p>
+<p>0     3593  1.661979</p>
+<p>1      546  1.863184</p>
+<p>2      181  1.875201</p>
+<p>3       65  1.913053</p>
+<p>4     1760  1.952647</p>
+<p>5     1499  1.953704</p>
+<p>6     3997  1.997528</p>
+<p>7     1556  2.031953</p>
+<p>8     1389  2.035540</p>
+<p>9     2382  2.035966</p>
+<p><strong>User based CF Recommendation</strong></p>
+<p>In this approach, similarity between users is calculated based on their ratings.</p>
+<p>We can find similar users based the distance between user depending on how they have rated the movies.</p>
+<p>Our approach is based on Cosine based co-efficient.</p>
+<p><img style="max-width: 601.33px" src="img\6151d20176f885cc.png"></p>
+<p>Users with highest similarity values are similar users.</p>
+<p>user_sim_df.idxmax(axis=1)[0:5]</p>
+<p>0    0</p>
+<p>1    1</p>
+<p>2    2</p>
+<p>3    3</p>
+<p>4    4</p>
+<p>dtype: int64</p>
+<p>We can find the similar movies between users and check their ratings.</p>
+<p><img style="max-width: 601.33px" src="img\e92481df99f460cd.png"></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Process Outline:" duration="0">
-        <p>1.        Data will be downloaded from the MovieLens website</p>
+        <p>1.        Data will be downloaded from Kaggle link provided in the document.</p>
 <p>2.        Data Preprocessing will be done to clean the data and handle missing values</p>
 <p>3.        Exploratory Data Analysis will be performed to understand the data</p>
 <p>4.        Feature Selection</p>
 <p>5.        The model will be docekerized and deployed on AWS</p>
 <p>6.        A web application will be built using Flask to display the recommendations to the user</p>
+<p><strong>Exploratory Data Analysis:</strong></p>
+<p>Some columns in the dataset  did not add any meaning to the analysis or the</p>
+<p>understanding of the dataset.</p>
+<p>Such columns were removed from the dataset.</p>
+<p>The columns are:</p>
+<p>Original_dataset</p>
+<p>Adult (as there were just 9 adult movies in the dataset)</p>
+<p>The following use cases were looked into while exploring the dataset:</p>
+<ol type="1" start="1">
+<li>Movie languages in the Movie dataset and the count in each language</li>
+<li>Mot keywords found in title and overview column in the dataset</li>
+<li>List of popular movies in the dataset</li>
+<li>List of movies that have the highest votings</li>
+<li>Most critically acclaimed movie</li>
+<li>Number of movies released in a particular month or year</li>
+<li>Analysing the status of the movie (Released, Rumoured, Post Production, Planned, Canceled)</li>
+<li>Average Movie runtime</li>
+<li>Least successful movie</li>
+<li>Most successful movie </li>
+</ol>
+<p><img style="max-width: 720.00px" src="img\2a0b1bf9339d36cc.png"><img style="max-width: 720.00px" src="img\97cce50ae0a3ebc9.png"><img style="max-width: 720.00px" src="img\97119716748f492e.png"><img style="max-width: 720.00px" src="img\458b6205802a1bfd.png"><img style="max-width: 720.00px" src="img\c0df84aee6e340fa.png"></p>
 
 
       </google-codelab-step>
@@ -88,6 +195,24 @@
 <p>4)        Container: Docker</p>
 <p>5)        Cloud Tools/Platforms: AWS (Amazon WEb Services) EC2</p>
 <p>6)        Web Development Tools : Flask</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="User Interface:" duration="0">
+        <p><img style="max-width: 720.00px" src="img\3bf950e1f983e3b7.png"></p>
+<p><img style="max-width: 709.50px" src="img\53725f53ea6e2e78.png"><img style="max-width: 720.00px" src="img\b840cabc0fbfd5de.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="References and Sources:" duration="0">
+        <p><a href="https://search.yahoo.com/search?fr=mcafee&type=E211US714G0&p=cosine+similarity+matrix" target="_blank">https://search.yahoo.com/search?fr=mcafee&amp;type=E211US714G0&amp;p=cosine+similarity+matrix</a></p>
+<p><a href="http://adataanalyst.com/scikit-learn/countvectorizer-sklearn-example/" target="_blank">http://adataanalyst.com/scikit-learn/countvectorizer-sklearn-example/</a></p>
+<p><a href="https://www.datacamp.com/community/tutorials/recommender-systems-python" target="_blank">https://www.datacamp.com/community/tutorials/recommender-systems-python</a></p>
+<p><a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html" target="_blank">https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html</a></p>
+<p><a href="https://www.cnet.com/news/top-10-movie-recommendation-engines/" target="_blank">https://www.cnet.com/news/top-10-movie-recommendation-engines/</a></p>
+<p><a href="http://arek-paterek.com/predict.pdf" target="_blank">http://arek-paterek.com/predict.pdf</a><br></p>
 
 
       </google-codelab-step>
